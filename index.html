@@ -84,14 +84,13 @@
           const camera = document.querySelector("#mainCamera");
 
           introSpeak("Welcome to explore the parts of hibiscus...", () => {
-                setTimeout(() => {
                   h3.setAttribute("visible", "true");
 
                   // Show quiz button after hibiscus parts
                   setTimeout(() => {
                     document.querySelector("#quizButton").setAttribute("visible", "true");
                   }, 3000);
-            }, 5000); // Speak for 5 seconds before starting hibiscus parts
+             // Speak for 5 seconds before starting hibiscus parts
           });
         }
       } catch (err) {
