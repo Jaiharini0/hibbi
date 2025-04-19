@@ -69,57 +69,8 @@
       utterance.onend = callback;
       speechSynthesis.speak(utterance);
     }
+      
 
-    AFRAME.registerComponent("label-on-click", {
-          init: function () {
-            const el = this.el;
-            const scene = document.querySelector("a-scene");
-
-            el.addEventListener("model-loaded", () => {
-              const mesh = el.getObject3D("mesh");
-
-              mesh.traverse((node) => {
-                if (node.isMesh) {
-                  node.name = node.name || "Unnamed";
-                  const wrapper = document.createElement("a-entity");
-                  wrapper.setAttribute("class", "clickable");
-
-                  // Position wrapper at the part
-                  wrapper.object3D.position.copy(node.getWorldPosition(new THREE.Vector3()));
-
-                  // Make it visible to raycaster
-                  wrapper.setAttribute("geometry", {
-                    primitive: "sphere",
-                    radius: 0.05,
-                  });
-                  wrapper.setAttribute("material", "opacity: 0; transparent: true");
-
-                  wrapper.addEventListener("click", () => {
-                    // Remove previous labels
-                    const oldLabels = document.querySelectorAll(".label");
-                    oldLabels.forEach((l) => l.parentNode.removeChild(l));
-
-                    // Add label
-                    const label = document.createElement("a-entity");
-                    label.setAttribute("class", "label");
-                    label.setAttribute("position", "0 0.15 0"); // Above the part
-                    label.setAttribute("text", {
-                      value: node.name,
-                      align: "center",
-                      color: "#ffcc00",
-                      width: 3,
-                      baseline: "bottom",
-                    });
-
-                    wrapper.appendChild(label);
-                  });
-
-                  scene.appendChild(wrapper);
-                }
-              });
-            });
-          },
-        });
 
     document.getElementById('startAR').addEventListener('click', async function () {
       try {
